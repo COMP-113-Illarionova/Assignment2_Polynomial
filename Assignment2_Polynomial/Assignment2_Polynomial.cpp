@@ -4,15 +4,11 @@
 using namespace std;
 bool checkSign(char c);
 
-bool checkSign(char c) {
-	if (c == '+') return false;
-	else if (c == '-') return true;
-}
-
 int main() {
 
 	double polynomial1[10] = {};
 	double polynomial2[10] = {};
+	double sum[10] = {};
 	char c;
 	double coefficient = 0;
 	int power = 0;
@@ -20,7 +16,7 @@ int main() {
 	bool isSignNeg = false;
 
 
-	cout << "Enter first polynomial: ";
+	cout << "\nEnter first polynomial: ";
 	while (c = cin.get(), c != '\n') {
 
 		if (c == '+' || c == '-') {
@@ -95,11 +91,15 @@ int main() {
 	}
 
 	for (int i = 9; i >= 0; i--) {
-		if (polynomial1[i] != 0)
+		if (polynomial1[i] != 0) {
 			cout << "coefficient = " << polynomial1[i] << "   power = " << i << endl;
+		}
 	}
 
-	cout << "Enter second polynomial: ";
+	for (int i =0; i<10;i++)
+		cout << polynomial1[i] << ' ';
+
+	cout << "\nEnter second polynomial: ";
 	coefficient = 0;
 	power = 0;
 	nextPower = false;
@@ -176,10 +176,43 @@ int main() {
 			else polynomial2[0] = coefficient;
 	}
 
-	for (int i = 9; i >= 0; i--) {
+	for (int i = 9; i >= 0; i--) { //@todo remove
 		if (polynomial2[i] != 0)
 			cout << "coefficient = " << polynomial2[i] << "   power = " << i << endl;
 	}
 
+	for (int i = 0; i < 10; i++)
+		cout << polynomial2[i] << ' ';
+	cout << endl;//@todo remove
+
+	for (int i = 0; i < 10; i++) {
+			sum[i] = polynomial1[i] + polynomial2[i];
+		}
+
+
+	cout << "\nSum of polynomials = ";
+	for (int i = 9; i >= 0; i--) {
+		if (sum[i] != 0) {
+			if (i == 0) {
+				if (sum[i] > 0) cout << '+' << sum[i];
+				else cout << sum[i];
+			}
+			else if (i == 1) {
+				if (sum[i] > 0) cout << '+' << sum[i];
+				else if (sum[1] = 1) cout << 'x';
+				else if (sum[1] = -1) cout << '-x';
+				else cout << sum[i] << 'x';
+			}
+			else {
+				if (sum[i] > 0) cout << '+' << sum[i] << 'x' << i;//@todo ignore '+' for the first term
+				else cout << sum[i] << 'x' << i;
+			}
+		}
+	}
 	return 0;
+}
+
+bool checkSign(char c) {
+	if (c == '+') return false;
+	else if (c == '-') return true;
 }
