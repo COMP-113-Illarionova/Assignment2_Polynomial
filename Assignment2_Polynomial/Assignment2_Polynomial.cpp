@@ -14,6 +14,7 @@ int main() {
 	bool nextPower = false; //set to false
 
 	cout << "Enter first polynomial: ";
+
 	while (c = cin.get(), c != '\n') {
 
 		if (c == '+' || c == '-') {
@@ -36,7 +37,10 @@ int main() {
 
 			if (nextPower) {
 				cin >> power;
-				polynomial1[power] = coefficient;
+				if (polynomial1[power]!=0)
+					polynomial1[power] += coefficient;
+				else 
+					polynomial1[power] = coefficient;
 				nextPower=false;
 				coefficient = NULL;
 			}
