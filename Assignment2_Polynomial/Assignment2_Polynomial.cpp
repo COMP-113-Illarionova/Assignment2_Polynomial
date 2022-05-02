@@ -2,6 +2,12 @@
 #include <iostream>
 #include <string>
 using namespace std;
+bool checkSign(char c);
+
+bool checkSign(char c) {
+	if (c == '+') return false;
+	else if (c == '-') return true;
+}
 
 int main() {
 
@@ -16,22 +22,24 @@ int main() {
 
 
 	cout << "Enter first polynomial: ";
-
 	while (c = cin.get(), c != '\n') {
 
 		if (c == '+' || c == '-') {
 
-			if (c == '+') isSignNeg = false;
-			else if (c == '-') isSignNeg = true;
+			isSignNeg = checkSign(c);
 
-			else if (nextPower && coefficient == NULL) {
+			if (nextPower && coefficient == NULL) {
 				polynomial1[1] = 1;
+				nextPower = false;
 			}
 			else if (nextPower && coefficient != NULL) {
 				polynomial1[1] = coefficient;
+				coefficient = NULL;
+				nextPower = false;
 			}
 			else if (!nextPower && coefficient != NULL) {
 				polynomial1[0] = coefficient;
+				coefficient = NULL;
 			}
 			else
 				nextPower = false;
@@ -52,6 +60,7 @@ int main() {
 							polynomial1[power] -= coefficient;
 						else polynomial1[power] = coefficient - polynomial1[power];
 					}
+					coefficient = NULL;
 				}
 				else if (polynomial1[power] != 0 && !isSignNeg)
 					polynomial1[power] += coefficient;
@@ -80,5 +89,8 @@ int main() {
 		if (polynomial1[i] != 0)
 			cout << "coefficient = " << polynomial1[i] << "   power = " << i << endl;
 	}
+
+	cout << "Enter second polynomial: ";
+
 	return 0;
 }
