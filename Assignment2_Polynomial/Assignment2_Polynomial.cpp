@@ -2,36 +2,46 @@
 #include <iostream>
 #include <string>
 using namespace std;
+const int MAX = 10;
+bool nextPower = false;//set to false
+bool isSignNeg=false;
+
+double initialiseArray(double& array);
 
 int main() {
 	
-	double polynomial1[10] = {};
-	double polynomial2[10] = {};
-	char c;
-	double coefficient = 0;
-	int power = 0;
-	int counter = 0;
-	bool nextPower = false;//set to false
-	bool isSignNeg=false;
-
+	//char c;
+	double polynomial1[MAX] = {};
+	double polynomial2[MAX] = {};
 
 	cout << "Enter first polynomial: ";
+	initialiseArray(polynomial1[MAX-1]);
 
+	
+
+	return 0;
+}
+
+double initialiseArray(double &array) {
+
+	double coefficient = 0;
+	int power = 0;
+	char c;
+	double* pointer = &array;
 	while (c = cin.get(), c != '\n') {
-
 		if (c == '+' || c == '-') {
 
 			if (c == '+') isSignNeg = false;
 			else if (c == '-') isSignNeg = true;
 
 			else if (nextPower && coefficient == NULL) {
-				polynomial1[1] = 1;
+				*(pointer + 1) = 1;
 			}
 			else if (nextPower && coefficient != NULL) {
-				polynomial1[1] = coefficient;
+				*(pointer + 1) = coefficient;
 			}
 			else if (!nextPower && coefficient != NULL) {
-				polynomial1[0] = coefficient;
+				*pointer = coefficient;
 			}
 			else
 				nextPower = false;
@@ -43,20 +53,20 @@ int main() {
 
 			if (nextPower) {
 				cin >> power;
-				if (polynomial1[power] != 0 && isSignNeg) {
+				if (*pointer != 0 && isSignNeg) {
 					if (coefficient < 0) {
-						polynomial1[power] += coefficient;
+						*(pointer + power) += coefficient;
 					}
 					else {
-						if (polynomial1[power] > coefficient)
-							polynomial1[power] -= coefficient;
-						else polynomial1[power] = coefficient - polynomial1[power];
+						if (*(pointer + power) > coefficient)
+							*(pointer + power) -= coefficient;
+						else *(pointer + power) = coefficient - *(pointer + power);
 					}
 				}
-				else if (polynomial1[power] != 0 && !isSignNeg)
-					polynomial1[power] += coefficient;
+				else if (*(pointer + power) != 0 && !isSignNeg)
+					*(pointer + power) += coefficient;
 				else
-					polynomial1[power] = coefficient;
+					*(pointer + power) = coefficient;
 				nextPower = false;
 				coefficient = NULL;
 			}
@@ -69,16 +79,17 @@ int main() {
 				else cin >> coefficient;
 			}
 		}
-	}
 
-	if (c == '\n' && coefficient != NULL) {
-		if(nextPower) polynomial1[1] = coefficient;
-		else polynomial1[0] = coefficient;
-	}
+		if (c == '\n' && coefficient != NULL) {
+			if (nextPower) *(pointer + 1) = coefficient;
+			else *pointer = coefficient;
+		}
 
-	for (int i = 9; i >= 0; i--) {
-		if (polynomial1[i] != 0)
-			cout << "coefficient = " << polynomial1[i] << "   power = " << i << endl;
+		for (int i = 9; i > 0; i--) {
+			if (*(pointer + i) != 0)
+				cout << "coefficient = " << *(pointer + i) << "   power = " << i << endl;
+		}
+
 	}
-	return 0;
+	return array;
 }
