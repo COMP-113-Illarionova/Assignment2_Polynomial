@@ -12,7 +12,8 @@ int main() {
 	int power = 0;
 	int counter = 0;
 	bool nextPower = false;//set to false
-	bool isSignNeg;
+	bool isSignNeg=false;
+
 
 	cout << "Enter first polynomial: ";
 
@@ -42,10 +43,16 @@ int main() {
 
 			if (nextPower) {
 				cin >> power;
-				if (polynomial1[power] != 0 && isSignNeg)
-					if (polynomial1[power] > coefficient)
-						polynomial1[power] -= coefficient;
-					else polynomial1[power] = coefficient - polynomial1[power];
+				if (polynomial1[power] != 0 && isSignNeg) {
+					if (coefficient < 0) {
+						polynomial1[power] += coefficient;
+					}
+					else {
+						if (polynomial1[power] > coefficient)
+							polynomial1[power] -= coefficient;
+						else polynomial1[power] = coefficient - polynomial1[power];
+					}
+				}
 				else if (polynomial1[power] != 0 && !isSignNeg)
 					polynomial1[power] += coefficient;
 				else
