@@ -26,17 +26,17 @@ int main() {
 			else if (nextPower && coefficient == NULL) {
 				polynomial1[1] = 1;
 			}
-			else if (nextPower && coefficient!=NULL) {
+			else if (nextPower && coefficient != NULL) {
 				polynomial1[1] = coefficient;
 			}
 			else if (!nextPower && coefficient != NULL) {
 				polynomial1[0] = coefficient;
 			}
 			else
-				nextPower=false;
+				nextPower = false;
 		}
 		else if (c == 'x' || c == 'X')
-			nextPower=true;
+			nextPower = true;
 		else if (c >= '0' && c <= '9') {
 			cin.unget();
 
@@ -48,14 +48,18 @@ int main() {
 					else polynomial1[power] = coefficient - polynomial1[power];
 				else if (polynomial1[power] != 0 && !isSignNeg)
 					polynomial1[power] += coefficient;
-				else 
+				else
 					polynomial1[power] = coefficient;
-				nextPower=false;
+				nextPower = false;
 				coefficient = NULL;
 			}
-			
+
 			else {
-				cin >> coefficient;
+				if (isSignNeg) {
+					cin >> coefficient;
+					coefficient *= -1;
+				}
+				else cin >> coefficient;
 			}
 		}
 	}
