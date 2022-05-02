@@ -85,8 +85,13 @@ int main() {
 	}
 
 	if (c == '\n' && coefficient != NULL) {
-		if (nextPower) polynomial1[1] = coefficient;
-		else polynomial1[0] = coefficient;
+		if (nextPower) {
+			if (polynomial1[1] != 0) polynomial1[1] += coefficient;
+			else polynomial1[1] = coefficient;
+		}
+		else
+			if (polynomial1[0] != 0) polynomial1[0] += coefficient;
+			else polynomial1[0] = coefficient;
 	}
 
 	for (int i = 9; i >= 0; i--) {
@@ -98,6 +103,7 @@ int main() {
 	coefficient = 0;
 	power = 0;
 	nextPower = false;
+	isSignNeg = false;
 	while (c = cin.get(), c != '\n') {
 
 		if (c == '+' || c == '-') {
@@ -120,8 +126,12 @@ int main() {
 			else
 				nextPower = false;
 		}
-		else if (c == 'x' || c == 'X')
+		else if (c == 'x' || c == 'X') {
+			if (coefficient == NULL)
+				if (isSignNeg) coefficient = -1;
+				else coefficient = 1;
 			nextPower = true;
+		}
 		else if (c >= '0' && c <= '9') {
 			cin.unget();
 
@@ -157,8 +167,13 @@ int main() {
 	}
 
 	if (c == '\n' && coefficient != NULL) {
-		if (nextPower) polynomial2[1] = coefficient;
-		else polynomial2[0] = coefficient;
+		if (nextPower) {
+			if (polynomial2[1] != 0) polynomial2[1] += coefficient;
+			else polynomial2[1] = coefficient;
+		}
+		else
+			if (polynomial2[0] != 0) polynomial2[0] += coefficient;
+			else polynomial2[0] = coefficient;
 	}
 
 	for (int i = 9; i >= 0; i--) {
