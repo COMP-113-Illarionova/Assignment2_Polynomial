@@ -1,6 +1,7 @@
 //Program to add two string polynomials through arrays
 #include <iostream>
 #include <string>
+#include <cassert>
 using namespace std;
 bool checkSign(char c);
 
@@ -12,6 +13,7 @@ int main() {
 	char c;
 	double coefficient = 0;
 	int power = 0;
+	int count = 0;
 	bool nextPower = false;//set to false
 	bool isSignNeg = false;
 
@@ -50,7 +52,11 @@ int main() {
 			cin.unget();
 
 			if (nextPower) {
+				//do {
+					//cout << "Power must be an integer!";
 				cin >> power;
+				//}while (power %1!=0);
+
 				if (polynomial1[power] != 0 && isSignNeg) {
 					if (coefficient < 0) {
 						polynomial1[power] += coefficient;
@@ -88,12 +94,6 @@ int main() {
 		else
 			if (polynomial1[0] != 0) polynomial1[0] += coefficient;
 			else polynomial1[0] = coefficient;
-	}
-
-	for (int i = 9; i >= 0; i--) {
-		if (polynomial1[i] != 0) {
-			cout << "coefficient = " << polynomial1[i] << "   power = " << i << endl;
-		}
 	}
 
 	for (int i =0; i<10;i++)
@@ -137,6 +137,7 @@ int main() {
 
 			if (nextPower) {
 				cin >> power;
+				//assert(power > 0); @todo remove
 				if (polynomial2[power] != 0 && isSignNeg) {
 					if (coefficient < 0) {
 						polynomial2[power] += coefficient;
@@ -176,11 +177,6 @@ int main() {
 			else polynomial2[0] = coefficient;
 	}
 
-	for (int i = 9; i >= 0; i--) { //@todo remove
-		if (polynomial2[i] != 0)
-			cout << "coefficient = " << polynomial2[i] << "   power = " << i << endl;
-	}
-
 	for (int i = 0; i < 10; i++)
 		cout << polynomial2[i] << ' ';
 	cout << endl;//@todo remove
@@ -189,23 +185,27 @@ int main() {
 			sum[i] = polynomial1[i] + polynomial2[i];
 		}
 
-
 	cout << "\nSum of polynomials = ";
 	for (int i = 9; i >= 0; i--) {
 		if (sum[i] != 0) {
 			if (i == 0) {
-				if (sum[i] > 0) cout << '+' << sum[i];
+				if (sum[i] > 0 && count != 0)
+					cout << '+' << sum[i];
 				else cout << sum[i];
+				count++;
 			}
+
 			else if (i == 1) {
-				if (sum[i] > 0) cout << '+' << sum[i];
-				else if (sum[1] = 1) cout << 'x';
-				else if (sum[1] = -1) cout << '-x';
+				if (sum[i] > 0 && count != 0) cout << '+' << sum[i] << 'x';
+				else if (sum[1] == 1) cout << 'x';
+				else if (sum[1] == -1) cout << '-x';
 				else cout << sum[i] << 'x';
+				count++;
 			}
 			else {
-				if (sum[i] > 0) cout << '+' << sum[i] << 'x' << i;//@todo ignore '+' for the first term
+				if (sum[i] > 0 && count != 0) cout << '+' << sum[i] << 'x' << i;//@todo ignore '+' for the first term
 				else cout << sum[i] << 'x' << i;
+				count++;
 			}
 		}
 	}
