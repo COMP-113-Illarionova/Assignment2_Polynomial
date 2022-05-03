@@ -6,40 +6,28 @@ const int MAX = 10;
 bool nextPower = false;//set to false
 bool isSignNeg = false;
 
-double initialiseArray();
-//double initialiseArray(double array);
-
+double initialiseArray(double& array);
 
 int main() {
 
 	//char c;
-	//double polynomial1[MAX] = {};
+	double polynomial1[MAX] = {};
 	double polynomial2[MAX] = {};
 
-	double balance[5] = {};
-	double* p;
-	p = balance;
-
 	cout << "Enter first polynomial: ";
-	//initialiseArray(polynomial1[MAX-1]);//???
-	initialiseArray();
+	initialiseArray(polynomial1[MAX - 1]);
 
-	//for (int i = 9; i > 0; i--) {
-		//if (polynomial1[i] != 0)
-			//cout << "coefficient = " << polynomial1[i] << "   power = " << i << endl;
-	//}
+
 
 	return 0;
 }
 
-//double initialiseArray(double array) {
-double initialiseArray() {
-	double polynomial1[MAX] = {};
+double initialiseArray(double& array) {
+
 	double coefficient = 0;
 	int power = 0;
 	char c;
-	double* pointer;
-	pointer = polynomial1;
+	double* pointer = &array;
 	while (c = cin.get(), c != '\n') {
 		if (c == '+' || c == '-') {
 
@@ -62,7 +50,6 @@ double initialiseArray() {
 			nextPower = true;
 		else if (c >= '0' && c <= '9') {
 			cin.unget();
-
 
 			if (nextPower) {
 				cin >> power;
@@ -90,6 +77,7 @@ double initialiseArray() {
 					coefficient *= -1;
 				}
 				else cin >> coefficient;
+				cout << "--> " << coefficient << endl;
 			}
 		}
 
@@ -98,10 +86,12 @@ double initialiseArray() {
 			else *pointer = coefficient;
 		}
 
+		
+
 	}
 	for (int i = 9; i >= 0; i--) {
 		if (*(pointer + i) != 0)
 			cout << "coefficient = " << *(pointer + i) << "   power = " << i << endl;
 	}
-	return polynomial1[MAX-1];//????
+	return array;
 }
