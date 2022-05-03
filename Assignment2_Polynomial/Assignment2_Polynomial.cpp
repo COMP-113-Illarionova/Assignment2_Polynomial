@@ -38,12 +38,12 @@ int main() {
 										// we put coefficient of the current term in the array
 			}
 			else if (nextPower && coefficient != NULL) {  // If we expect the power and coefficient!=0
-				polynomial1[1] = coefficient;
+				polynomial1[1] += coefficient;
 				coefficient = NULL;     // resetting coefficent
 				nextPower = false;      // resetting nextPower, moving on to the next term
 			}
 			else if (!nextPower && coefficient != NULL) { // Finding constant: We don't expect power and we have coefficient stored
-				polynomial1[0] = coefficient;	//x^0 is just constant
+				polynomial1[0] += coefficient;	//x^0 is just constant
 				coefficient = NULL;		// resetting coefficient 
 			}
 			else
@@ -96,11 +96,12 @@ int main() {
 	if (c == '\n' && coefficient != NULL) {					// Reached the end of the line and have unused coefficient
 		if (nextPower) {									// Expect a power, then we have coefficient for x^1 
 			if (polynomial1[1] != 0) polynomial1[1] += coefficient;
-			else polynomial1[1] = coefficient;
+			//else polynomial1[1] = coefficient;
 		}
 		else												// Don't expect a power, have a constant, i.e. x^0 coefficient
 			if (polynomial1[0] != 0) polynomial1[0] += coefficient; 
-			else polynomial1[0] = coefficient;
+			//else 
+			//polynomial1[0] += coefficient;
 	}
 
 	for (int i =0; i<10;i++)
