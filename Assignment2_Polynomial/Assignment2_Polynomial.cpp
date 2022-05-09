@@ -1,7 +1,6 @@
 /**
 * file Assignment2_polynomial.cpp
 * \brief Program to add two string polynomials through arrays
-* \details 
 * \author Alisa Illarionova
 * \date 3/5/2022
 */
@@ -238,18 +237,18 @@ void displaySum(const double sum[], const int position) {
 		if (sum[i] != 0) {								// Print only non-zero terms
 			if (i == 0) {								// Printing constant
 				if (sum[i] > 0 && count != 0)			// Only print '+' for positive term only when not first term
-					cout << '+' << sum[i];
+					cout << "+" << sum[i];
 				else cout << sum[i];
 			}
 			else if (i == 1) {							// Print x^1	
-				if (sum[i] > 0 && count != 0) cout << '+' << sum[i] << 'x';
-				else if (sum[1] == 1) cout << 'x';
-				else if (sum[1] == -1) cout << '-x';
-				else cout << sum[i] << 'x';
+				if (sum[i] > 0 && count != 0) cout << "+" << sum[i] << "x";
+				else if (sum[i] == 1.00) cout << "x";
+				else if (sum[i] == -1.00) cout << "-x";
+				else cout << sum[i] << "x";
 			}
 			else {
-				if (sum[i] > 0 && count != 0) cout << '+' << sum[i] << 'x' << i;
-				else cout << sum[i] << 'x' << i;
+				if (sum[i] > 0 && count != 0) cout << "+" << sum[i] << "x" << i;
+				else cout << sum[i] << "x" << i;
 			}
 			count++;									// Needed to print out first positive term without '+'
 		}
